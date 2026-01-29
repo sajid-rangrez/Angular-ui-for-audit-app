@@ -33,26 +33,28 @@ import { ApiService } from '../../core/api.service';
             <span class="text-sm text-gray-500">{{ log.timestamp | date:'medium' }}</span>
           </div>
 
-          <div class="p-4" *ngIf="log.details && log.details.length > 0">
+          <div class="p-4" *ngIf="log.auditFields && log.auditFields.length > 0">
             <table class="w-full text-sm">
               <thead class="text-xs text-gray-500 uppercase bg-gray-50 border-b">
                 <tr>
+                  <th class="py-2 text-left w-1/4 pl-2">Table</th>
                   <th class="py-2 text-left w-1/4 pl-2">Column</th>
                   <th class="py-2 text-left w-1/3 text-red-600 bg-red-50/50">Old Value</th>
                   <th class="py-2 text-left w-1/3 text-green-600 bg-green-50/50">New Value</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let detail of log.details" class="border-b last:border-0 hover:bg-gray-50">
-                  <td class="py-2 font-medium pl-2">{{ detail.columnName }}</td>
-                  <td class="py-2 text-red-600 break-all bg-red-50/20">{{ detail.oldValue }}</td>
-                  <td class="py-2 text-green-600 break-all bg-green-50/20">{{ detail.newValue }}</td>
+                <tr *ngFor="let auditFields of log.auditFields" class="border-b last:border-0 hover:bg-gray-50">
+                  <td class="py-2 font-medium pl-2">{{ auditFields.tableName }}</td>
+                  <td class="py-2 font-medium pl-2">{{ auditFields.columnName }}</td>
+                  <td class="py-2 text-red-600 break-all bg-red-50/20">{{ auditFields.oldValue }}</td>
+                  <td class="py-2 text-green-600 break-all bg-green-50/20">{{ auditFields.newValue }}</td>
                 </tr>
               </tbody>
             </table>
           </div>
           
-          <div class="p-4 text-gray-400 italic text-sm" *ngIf="!log.details || log.details.length === 0">
+          <div class="p-4 text-gray-400 italic text-sm" *ngIf="!log.auditFields || log.auditFields.length === 0">
             No specific field changes recorded.
           </div>
         </div>
